@@ -1,5 +1,5 @@
 name: flutter_news
-description: A new Flutter project.
+description: A new Flutter news APP.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -47,7 +47,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/assets/
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -65,7 +65,11 @@ flutter:
       fonts:
         - asset: assets/fonts/Avenir-Book.ttf
           weight: 400
-    - family: Montserrat
+    - family: Montserrat-Medium
+      fonts:
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+    - family: Montserrat-SemiBold
       fonts:
         - asset: assets/fonts/Montserrat-SemiBold.ttf
           weight: 600
