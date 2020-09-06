@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_news/common/utils/utils.dart';
@@ -14,9 +12,9 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   Widget _buildPageHeader() {
     return Container(
-      margin: EdgeInsets.only(top: dusetHeight(60.0)),
+      margin: EdgeInsets.only(top: dusetHeight(60.0 + 44.0)),
       child: Text('Feature', style: TextStyle(
-        color: AppColors.primaryTest,
+        color: AppColors.primaryText,
         fontFamily: 'Montserrat',
         fontSize: dusetFontSize(24),
         fontWeight: FontWeight.w400,
@@ -37,7 +35,7 @@ class _WelcomePageState extends State<WelcomePage> {
           fontSize: dusetFontSize(16),
           fontWeight: FontWeight.normal,
           height: 1.3,
-          color: AppColors.primaryTest
+          color: AppColors.primaryText
         ),
       ),
     );
@@ -47,7 +45,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return Container(
       width: dusetWidth(295),
       height: dusetHeight(80),
-      margin: EdgeInsets.only(top: dusetHeight(2)),
+      margin: EdgeInsets.only(top: dusetHeight(marginTop)),
       child: Row(
         children: <Widget>[
           Container(
@@ -68,7 +66,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 fontSize: dusetFontSize(16),
                 fontFamily: "Avenir",
                 fontWeight: FontWeight.normal,
-                color: AppColors.primaryTest
+                color: AppColors.primaryText
               ),
             ),
           )
@@ -105,8 +103,8 @@ class _WelcomePageState extends State<WelcomePage> {
           _buildPageHeader(),
           _buildPageHeaderDetail(),
           _buildPageItems("feature-1", "Compelling photography and typography provide a beautiful reading", 86),
-          _buildPageItems("feature-2", "Secotr news never shares your personal data width advertisers or publishers", 86),
-          _buildPageItems("feature-3", "You can get Premium to unlock hundreds of publications", 86),
+          _buildPageItems("feature-2", "Secotr news never shares your personal data width advertisers or publishers", 40),
+          _buildPageItems("feature-3", "You can get Premium to unlock hundreds of publications", 40),
           Spacer(),
           _buildPageButton(context),
         ]),

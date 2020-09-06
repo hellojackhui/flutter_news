@@ -20,8 +20,27 @@ class _SignInPageState extends State<SignInPage> {
     pwdcontroller = TextEditingController(text: '123');
   }
   
+  Future _handleNavSignup(BuildContext context) {
+    Navigator.pushNamed(context, "/sign-up");
+  }
 
-  // logo
+  void _handleSignIn() {
+    if (!duIsEmail(emailcontroller.value.text)) {
+      toastInfo(msg: '请正确输入邮件');
+      return;
+    }
+    if (!duCheckStringLength(pwdcontroller.value.text, 6)) {
+      toastInfo(msg: '密码不能小于6位');
+      return;
+    }
+  }
+
+  // 跳转 注册界面
+  _handleNavSignUp() {
+    // ExtendedNavigator.rootNavigator.pushNamed(Routes.signUpPageRoute);
+  }
+
+  // 登录
   Widget _buildLogo() {
     return Container(
       width: dusetWidth(110),
@@ -70,7 +89,7 @@ class _SignInPageState extends State<SignInPage> {
               "SECTOR",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.primaryTest,
+                color: AppColors.primaryText,
                 fontFamily: "Montserrat",
                 fontWeight: FontWeight.w600,
                 fontSize: dusetFontSize(24),
@@ -82,7 +101,7 @@ class _SignInPageState extends State<SignInPage> {
             "news",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.primaryTest,
+              color: AppColors.primaryText,
               fontFamily: "Avenir",
               fontWeight: FontWeight.w400,
               fontSize: dusetFontSize(16),
@@ -95,7 +114,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   // 登录表单
-  Widget _buildInputForm() {
+  Widget _buildInputForm(context) {
     return Container(
       width: dusetWidth(295),
       margin: EdgeInsets.only(top: dusetHeight(49)),
@@ -111,16 +130,12 @@ class _SignInPageState extends State<SignInPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 btnFlatButtonWidget(
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () => _handleNavSignup(context),
                   gbColor: AppColors.thirdElement,
                   title: "Sign up"
                 ),
                 btnFlatButtonWidget(
-                  onPressed: () {
-                    
-                  },
+                  onPressed: _handleSignIn,
                   gbColor: AppColors.primaryElement,
                   title: "Sign in"
                 ),
@@ -146,16 +161,71 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  // 第三方登录
+    // 第三方登录
   Widget _buildThirdPartyLogin() {
-    return Container();
+    return Container(
+      width: dusetWidth(295),
+      margin: EdgeInsets.only(bottom: dusetHeight(40)),
+      child: Column(
+        children: <Widget>[
+          // title
+          Text(
+            "Or sign in with social networks",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.primaryText,
+              fontFamily: "Avenir",
+              fontWeight: FontWeight.w400,
+              fontSize: dusetFontSize(16),
+            ),
+          ),
+          // 按钮
+          Padding(
+            padding: EdgeInsets.only(top: dusetHeight(20)),
+            child: Row(
+              children: <Widget>[
+                btnFlatButtonBorderOnlyWidget(
+                  onPressed: () {},
+                  width: 88,
+                  iconFileName: "twitter",
+                ),
+                Spacer(),
+                btnFlatButtonBorderOnlyWidget(
+                  onPressed: () {},
+                  width: 88,
+                  iconFileName: "google",
+                ),
+                Spacer(),
+                btnFlatButtonBorderOnlyWidget(
+                  onPressed: () {},
+                  width: 88,
+                  iconFileName: "facebook",
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   // 注册按钮
   Widget _buildSignupButton() {
-    return Container();
+    return Container(
+      margin: EdgeInsets.only(bottom: dusetHeight(20)),
+      child: btnFlatButtonWidget(
+        onPressed: _handleNavSignUp,
+        width: 294,
+        gbColor: AppColors.secondaryElement,
+        fontColor: AppColors.primaryText,
+        title: "Sign up",
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+      ),
+    );
   }
-
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,7 +234,7 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           children: <Widget>[
             _buildLogo(),
-            _buildInputForm(),
+            _buildInputForm(context),
             Spacer(),
             _buildThirdPartyLogin(),
             _buildSignupButton(),

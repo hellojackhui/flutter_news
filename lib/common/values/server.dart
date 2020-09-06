@@ -1,0 +1,1 @@
+const SERVER_HOST = "http://rap2.taobao.org:38080/app/mock/265843";

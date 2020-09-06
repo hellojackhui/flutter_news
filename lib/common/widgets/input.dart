@@ -26,7 +26,7 @@ Widget inputTextEdit({
         border: InputBorder.none,
       ),
       style: TextStyle(
-        color: AppColors.primaryTest,
+        color: AppColors.primaryText,
         fontFamily: "Avenir",
         fontWeight: FontWeight.w400,
         fontSize: dusetFontSize(18),
