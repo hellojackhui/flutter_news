@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/common/api/user.dart';
+import 'package:flutter_news/common/entity/user.dart';
+import 'package:flutter_news/common/utils/security.dart';
 import 'package:flutter_news/common/utils/utils.dart';
 import 'package:flutter_news/common/values/values.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_news/common/widgets/input.dart';
 import 'package:flutter_news/common/widgets/widget.dart';
+import 'package:flutter_news/global.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -24,7 +28,7 @@ class _SignInPageState extends State<SignInPage> {
     Navigator.pushNamed(context, "/sign-up");
   }
 
-  void _handleSignIn() {
+  void _handleSignIn() async {
     if (!duIsEmail(emailcontroller.value.text)) {
       toastInfo(msg: '请正确输入邮件');
       return;
@@ -33,6 +37,11 @@ class _SignInPageState extends State<SignInPage> {
       toastInfo(msg: '密码不能小于6位');
       return;
     }
+    LoginRequestEntity params = LoginRequestEntity(email: emailcontroller.value.text, password: duSHA256(pwdcontroller.value.text));
+    LoginResponseEntity res = await UserAPI.login(context: context, options: params);
+    Global.saveProfile(res);
+    
+    print(res);
   }
 
   // 跳转 注册界面
