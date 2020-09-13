@@ -1,13 +1,16 @@
 import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_news/common/utils/net_cache.dart';
 import 'package:flutter_news/common/utils/storage.dart';
 import 'package:flutter_news/common/values/server.dart';
 import 'package:flutter_news/common/values/values.dart';
 import 'package:flutter_news/common/widgets/widget.dart';
+import 'package:flutter_news/global.dart';
 
 class HttpUtil {
   static HttpUtil _instance = HttpUtil._internal();
@@ -47,16 +50,16 @@ class HttpUtil {
       }
       return einfo;
     }));
-    // dio.interceptors.add(NetCache());
-    // if (!Global.isRelease && PROXY_ENABLE) {
-    //   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
-    //     client.findProxy = (url) {
-    //       return "PROXY $PROXY_IP:$PROXY_PROT";
-    //     };
-    //     client.badCertificateCallback = 
-    //       (X509Certificate cert, String host, int port) => true;
-    //   };
-    // }
+    dio.interceptors.add(NetCache());
+    if (!Global.isRelease && PROXY_ENABLE) {
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+        client.findProxy = (url) {
+          return "PROXY $PROXY_IP:$PROXY_PORT ";
+        };
+        client.badCertificateCallback = 
+          (X509Certificate cert, String host, int port) => true;
+      };
+    }
   }
 
     // 错误信息
@@ -166,8 +169,7 @@ class HttpUtil {
   /// 读取本地配置
   Map<String, dynamic> getAuthorizationHeader() {
     var headers;
-    // String accessToken = Global.profile?.accessToken;
-    String accessToken = StorageUtil().getJSON(STORAGE_USER_PROFILE_KEY);
+    String accessToken = Global.profile?.accessToken;
     if (accessToken != null) {
       headers = {
         'Authorization': 'Bearer $accessToken',
@@ -197,10 +199,10 @@ class HttpUtil {
       "cacheKey": cacheKey,
       "cacheDisk": cacheDisk,
     });
-    // Map<String, dynamic> _authorization = getAuthorizationHeader();
-    // if (_authorization != null) {
-    //   requestOptions = requestOptions.merge(headers: _authorization);
-    // }
+    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    if (_authorization != null) {
+      requestOptions = requestOptions.merge(headers: _authorization);
+    }
     var response = await dio.get(path, queryParameters: params, options: requestOptions, cancelToken: cancelToken);
     return response.data;
   }
@@ -216,10 +218,11 @@ class HttpUtil {
     requestOptions = requestOptions.merge(extra: {
       "context": context,
     });
-    // Map<String, dynamic> _authorization = getAuthorizationHeader();
-    // if (_authorization != null) {
-    //   requestOptions = requestOptions.merge(headers: _authorization);
-    // }
+    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    if (_authorization != null) {
+      requestOptions = requestOptions.merge(headers: _authorization);
+    }
+    print(requestOptions);
     var response = await dio.post(path,
         data: params, options: requestOptions, cancelToken: cancelToken);
     return response.data;
@@ -236,10 +239,10 @@ class HttpUtil {
     requestOptions = requestOptions.merge(extra: {
       "context": context,
     });
-    // Map<String, dynamic> _authorization = getAuthorizationHeader();
-    // if (_authorization != null) {
-    //   requestOptions = requestOptions.merge(headers: _authorization);
-    // }
+    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    if (_authorization != null) {
+      requestOptions = requestOptions.merge(headers: _authorization);
+    }
     var response = await dio.put(path,
         data: params, options: requestOptions, cancelToken: cancelToken);
     return response.data;
@@ -256,10 +259,10 @@ class HttpUtil {
     requestOptions = requestOptions.merge(extra: {
       "context": context,
     });
-    // Map<String, dynamic> _authorization = getAuthorizationHeader();
-    // if (_authorization != null) {
-    //   requestOptions = requestOptions.merge(headers: _authorization);
-    // }
+    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    if (_authorization != null) {
+      requestOptions = requestOptions.merge(headers: _authorization);
+    }
     var response = await dio.patch(path,
         data: params, options: requestOptions, cancelToken: cancelToken);
     return response.data;
@@ -276,10 +279,10 @@ class HttpUtil {
     requestOptions = requestOptions.merge(extra: {
       "context": context,
     });
-    // Map<String, dynamic> _authorization = getAuthorizationHeader();
-    // if (_authorization != null) {
-    //   requestOptions = requestOptions.merge(headers: _authorization);
-    // }
+    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    if (_authorization != null) {
+      requestOptions = requestOptions.merge(headers: _authorization);
+    }
     var response = await dio.delete(path,
         data: params, options: requestOptions, cancelToken: cancelToken);
     return response.data;
@@ -296,10 +299,10 @@ class HttpUtil {
     requestOptions = requestOptions.merge(extra: {
       "context": context,
     });
-    // Map<String, dynamic> _authorization = getAuthorizationHeader();
-    // if (_authorization != null) {
-    //   requestOptions = requestOptions.merge(headers: _authorization);
-    // }
+    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    if (_authorization != null) {
+      requestOptions = requestOptions.merge(headers: _authorization);
+    }
     var response = await dio.post(path,
         data: FormData.fromMap(params),
         options: requestOptions,

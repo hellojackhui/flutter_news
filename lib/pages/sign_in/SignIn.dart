@@ -20,8 +20,8 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   initState() {
-    emailcontroller = TextEditingController(text: '123');
-    pwdcontroller = TextEditingController(text: '123');
+    emailcontroller = TextEditingController(text: 'huijiawe.i@163.com');
+    pwdcontroller = TextEditingController(text: '123123');
   }
   
   Future _handleNavSignup(BuildContext context) {

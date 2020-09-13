@@ -17,4 +17,11 @@ class AppColors {
 
   /// 第三控件-背景色
   static const Color thirdElement = Color.fromARGB(255, 45, 45, 47);
+
+
+  /// tabBar 默认颜色 灰色
+  static const Color tabBarElement = Color.fromARGB(255, 208, 208, 208);
+
+  /// tabCellSeparator 单元格底部分隔条 颜色
+  static const Color tabCellSeparator = Color.fromARGB(255, 230, 230, 231);
 }

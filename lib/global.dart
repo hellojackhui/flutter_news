@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_news/common/entity/user.dart';
 import 'package:flutter_news/common/utils/http.dart';
 import 'package:flutter_news/common/utils/storage.dart';
 import 'package:flutter_news/common/values/values.dart';
+import 'package:package_info/package_info.dart';
 
 class Global {
   static LoginResponseEntity profile = LoginResponseEntity(accessToken: null);
@@ -22,6 +24,9 @@ class Global {
 
   /// 是否第一次打开
   static bool isFirstOpen = false;
+
+  /// 是否 release
+  static bool get isRelease => bool.fromEnvironment("dart.vm.product");
 
   /// 是否离线登录
   static bool isOfflineLogin = false;
