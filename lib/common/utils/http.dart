@@ -13,7 +13,7 @@ import 'package:flutter_news/common/widgets/widget.dart';
 import 'package:flutter_news/global.dart';
 
 class HttpUtil {
-  static HttpUtil _instance = HttpUtil._internal();
+  static final HttpUtil _instance = HttpUtil._internal();
   factory HttpUtil() => _instance;
 
   Dio dio;

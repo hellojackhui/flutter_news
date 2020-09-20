@@ -29,19 +29,18 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _handleSignIn() async {
-    if (!duIsEmail(emailcontroller.value.text)) {
-      toastInfo(msg: '请正确输入邮件');
-      return;
-    }
-    if (!duCheckStringLength(pwdcontroller.value.text, 6)) {
-      toastInfo(msg: '密码不能小于6位');
-      return;
-    }
-    LoginRequestEntity params = LoginRequestEntity(email: emailcontroller.value.text, password: duSHA256(pwdcontroller.value.text));
-    LoginResponseEntity res = await UserAPI.login(context: context, options: params);
-    Global.saveProfile(res);
-    
-    print(res);
+    // if (!duIsEmail(emailcontroller.value.text)) {
+    //   toastInfo(msg: '请正确输入邮件');
+    //   return;
+    // }
+    // if (!duCheckStringLength(pwdcontroller.value.text, 6)) {
+    //   toastInfo(msg: '密码不能小于6位');
+    //   return;
+    // }
+    // LoginRequestEntity params = LoginRequestEntity(email: emailcontroller.value.text, password: duSHA256(pwdcontroller.value.text));
+    // LoginResponseEntity res = await UserAPI.login(context: context, options: params);
+    // Global.saveProfile(res);
+    Navigator.pushNamed(context, "/app");
   }
 
   // 跳转 注册界面
